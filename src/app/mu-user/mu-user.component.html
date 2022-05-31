@@ -1,0 +1,43 @@
+<mat-card class="is-alt border_r">
+  <form class="rdhForm" [formGroup]="userForm">
+      <mat-form-field appearance="fill" class="margin-top">
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" maxlength="250" type="text" required autocomplete="off"/>
+        <mat-hint align="end">{{userForm.value.name?.length || 0}}/250</mat-hint>
+        <mat-error>Required</mat-error>
+        <mat-error *ngIf="hasError('name', 'maxlength')">Name must be 250 characters in length or less.</mat-error>
+      </mat-form-field>
+  
+      <mat-form-field appearance="fill">
+        <mat-label>Email</mat-label>
+        <input matInput formControlName="email" type="email" placeholder="Email" required />
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Date of birth</mat-label>
+        <input matInput formControlName="dateOfBirth" [max]="maxDate" [matDatepicker]="picker" placeholder="MM/DD/YYYY" required>
+        <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill">
+        <mat-label>Address</mat-label>
+        <input matInput formControlName="address" type="text" placeholder="Address" required>
+        
+      </mat-form-field>
+  
+    <!-- <app-address-input formControlName="address" [optional]="true"></app-address-input> -->
+      
+      <div>
+        <a mat-raised-button class="btn-shadow" routerLink="../">Cancel</a>
+        <button
+          mat-raised-button
+          color="primary"
+          class="buttonCreate"
+          (click)="createUser()"
+          [disabled]="isSubmitting"
+          >Create</button
+        >
+      </div>
+    </form>
+</mat-card>
